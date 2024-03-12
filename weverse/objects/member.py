@@ -1,3 +1,5 @@
+import datetime
+
 class PartialMember:
     """Represents a Weverse Member with partial information available.
 
@@ -119,10 +121,10 @@ class ArtistProfile:
     def __init__(self, data: dict):
         self.official_name: str = data["officialName"]
         self.official_image_url: str = data["officialImageUrl"]
-        self.birthday: int = data["birthday"]["date"]
+        self.birthday: datetime.date = datetime.datetime.strptime(data["birthday"]["dateString"], '%Y.%m.%d').date()
 
     def __repr__(self):
-        return f"Artist Profile official_name={self.official_name}"
+        return f"Artist Profile official_name={self.official_name}, birthday={self.birthday}"
 
     def __str__(self):
         return self.official_name
